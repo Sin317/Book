@@ -1,4 +1,4 @@
-
+const itemsPerPage = 10;
 
 class Library{
     constructor(){
@@ -13,6 +13,9 @@ class Library{
             console.log(this.library[i]);
             console.log("yayy");
         }
+    }
+    size() {
+        return this.library.length;
     }
 }
 
@@ -32,10 +35,17 @@ class Book{
 }
 
 let addBookForm = document.getElementById("addbookform");
-
+let currentPage = 0;
 addBookForm.onsubmit = function(e) {addBook(e)};
 let displayButton = document.getElementById("displaybutton");
-displayButton.onclick = function() {displayBook()};
+displayButton.onclick = function() {displayBooks()};
+let nextPageButton = document.getElementById("nextpagebutton");
+nextPageButton.onclick = function() {nextPage()};
+let previousPageButton = document.getElementById("prevpagebutton");
+previousPageButton.onclick = function() {previousPage()};
+
+// nextPageButton.addEventListener("click", nextPage);
+// previousPageButton.addEventListener("click", previousPage);
 
 function addBook(e) {
     e.preventDefault();
@@ -48,13 +58,51 @@ function addBook(e) {
     console.log(name);
     let ip_book = new Book(name, author, year, read);
     library.addBook(ip_book);
+    // logging purposes -----
     library.displayBook();
 }
 
-function displayBook() {
-    for (let i = 0; i < library.library.length; i++) {
-        const para = document.createElement("p");
-        para.innerText = library.library[i].author;
-        document.body.appendChild(para);
+function displayBooks() {
+    const startIndex = currentPage * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const pageBooks = library.library.slice(startIndex, endIndex);
+    const bookContainer = document.getElementById("book-container");
+    bookContainer.innerHTML = "";
+    pageBooks.forEach(book => {
+        const bookBox = document.createElement("div");
+        bookBox.classList.add("book-box");
+        bookBox.innerHTML = `
+          <p><strong>Name:</strong> ${book.name}</p>
+          <div><strong>Author:</strong> ${book.author}</div>
+          <div><strong>Year Published:</strong> ${book.year}</div>
+        `;
+        bookContainer.appendChild(bookBox);
+      });
+    
+    // enable and disable nextbutton and prev button accordingly
+    let nextPageButton = document.getElementById("nextpagebutton");
+
+    let previousPageButton = document.getElementById("prevpagebutton");
+    console.log(previousPageButton, currentPage);
+    previousPageButton.disabled = currentPage == 0;
+    nextPageButton.disabled = endIndex - library.size() > 0;
+
+}
+
+function nextPage() {
+    // create next page only if current page has been filled
+    if (currentPage <= Math.ceil(library.size() / itemsPerPage)) {
+        currentPage++;
+        displayBooks();
     }
+    console.log(currentPage);
+
+}
+
+function previousPage() {
+    if (currentPage > 0) {
+        currentPage--;
+        displayBooks();
+    }
+    console.log(currentPage);
 }

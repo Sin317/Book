@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
-    <title> Book </title>
-    
+    <title> Book Catalogue </title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
     <button id="displaybutton"> Display </button>
@@ -24,5 +24,18 @@
       <label for="notread">Have Not read</label>
     <button type="submit"> Submit </button>
     </form>
+    
+
+    <div id="book-container">
+        <!-- Books will be dynamically added here -->
+    </div>
+
+    <div id="pagination">
+        <button id="prevpagebutton" disabled>Previous Page</button>
+        <button id="nextpagebutton" disabled>Next Page</button>
+    </div>
+    <footer>
+        <p>&copy; 2024 K's. All rights reserved.</p>
+    </footer>
     <script src="script.js"></script>
 </body>

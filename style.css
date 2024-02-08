@@ -1,0 +1,16 @@
+.book-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .book-box {
+    width: 200px; /* Adjust the width as needed */
+    height: 200px; /* Adjust the height as needed */
+    margin: 10px;
+    padding: 10px;
+    border: 4px solid burlywood;
+  }
+  
+#pagination {
+    margin-top: 50px;
+  }
