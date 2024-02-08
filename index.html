@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<head>
+    <title> Book </title>
+    
+</head>
+<body>
+    <button id="displaybutton"> Display </button>
+    <form id="addbookform"> 
+        <label for="name">Enter book name: </label>
+    <input type="text" name="name" id="name" required />
+    <label for="author">Enter author name: </label>
+    <input type="text" name="author" id="author" required />
+    <label for="year">Enter year published: </label>
+    <input type="text" name="year" id="year" required />
+    <input
+        type="radio"
+        id="read"
+        name="read"
+        value="read"
+        checked />
+      <label for="read">Has Read</label>
+
+      <input type="radio" id="notread" name="read" value="notread" />
+      <label for="notread">Have Not read</label>
+    <button type="submit"> Submit </button>
+    </form>
+    <script src="script.js"></script>
+</body>
